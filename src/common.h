@@ -7,9 +7,9 @@
 
 typedef int Errno;
 
-#define UNIMPLEMENTED                  \
+#define UNIMPLIMENTED                  \
   do {                                 \
-    printf("%s:%d: UNIMPLEMENTED %s\n",\
+    printf("%s:%d: UNIMPLIMENTED %s\n",\
             __FILE__,                  \
             __LINE__,                  \
             __func__);                 \

@@ -4,28 +4,30 @@
 #include <string.h>
 
 #include "../common.h"
+#include "../String/fs.h"
 
 #include "fs.h"
 #define FS_IMPLEMENTATION
 
 
-int read_entire_file(char *buffer[1024], const char *file_path) {
+String read_entire_file(const char *file_path) {
   FILE *fptr;
   fptr = fopen(file_path, "r");
   
   if (fptr == NULL) {
-    fprintf(stderr, "Failed to open file %s: %s\n", file_path, strerror(errno));
-    return 0;
+    fprintf(stderr, "[ERROR] Failed to open file %s: %s\n", file_path, strerror(errno));
+    exit(1);
   }
+
+  String result = String_create_string();
 
   int i = 0;
   for (char c = getc(fptr); c != EOF && i < READ_LIMIT-1; c = getc(fptr), ++i) {
-    printf("%d", c);
-    buffer[i] = c;
+    String_add_char(*result, c);
   }
-  buffer[++i] = '\0';
+  String_add_char(*result, '\0');
 
-  return 1;
+  return result;
 }
 
 int write_file(const char *file_path, const char *content) {
@@ -41,10 +43,10 @@ int write_file(const char *file_path, const char *content) {
 int append_file(const char *file_path, const char *content) {
   UNUSED(file_path);
   UNUSED(content);
-  UNIMPLEMENTED;
+  UNIMPLIMENTED;
 }
 
 int delete_fiel(const char *file_path) {
   UNUSED(file_path);
-  UNIMPLEMENTED;
+  UNIMPLIMENTED;
 }
