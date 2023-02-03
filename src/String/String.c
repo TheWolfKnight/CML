@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <string.h>
 
 #define STRING_IMPLIMENTATION
@@ -5,19 +6,21 @@
 #include "./String.h"
 
 String String_create_string() {
-  char buffer[DEFAULT_STRING_SIZE];
+  uint8_t *buffer = malloc(sizeof(char) * DEFAULT_STRING_SIZE);
   String result = {
-    .chars = buffer,
+    .chars = *buffer,
     .length = 0,
-    .capacity = DEFAULT_STRING_SIZE
+    .capacity = DEFAULT_STRING_SIZE,
   };
   return result;
 }
 
 int String_add_char(String *dest, char c) {
-  if (dest->length+1 > dest->capacity)
+  if (dest->length+1 >= dest->capacity) {
+    puts("Here");
     String_extend_string_size(dest, dest->capacity+1);
-  strcat(dest->chars, &c);
+  }
+  dest->chars[dest->length] = c;
   dest->length++;
   return 1;
 }
@@ -26,8 +29,8 @@ int String_add_cstr(String *dest, char *s) {
   size_t source_len = strlen(s);
   if (dest->length+source_len > dest->capacity)
     String_extend_string_size(dest, dest->capacity+source_len+1);
-  strcat(dest->chars, s);
-  dest->length += source_len;
+  for (int i = 0; dest->length < source_len; ++i, ++dest->length)
+    dest->chars[dest->length] = s[i];
   return 1;
 }
 
@@ -35,16 +38,13 @@ int String_pop_char(String *target, char *dest) {
   UNIMPLIMENTED;
 }
 
-static int String_extend_string_size(String *target, size_t new_size) {
-  char string[new_size];
-  size_t final_size;
-  for (size_t i = 0; i < new_size; ++i) {
-    if (new_size > target->length) {
-      final_size = i;
-      break;
-    }
-    string[i] = target->chars[i];
+int String_extend_string_size(String *dest, size_t new_size) {
+  uint8_t *new_string = malloc(sizeof(char) * new_size + 1);
+
+  for (int i = 0; i < new_size; ++i) {
+    new_string[i] = dest->chars[i];
   }
-  target->length = final_size;
+  free(dest->chars);
+  dest->chars = new_string;
   return 1;
 }

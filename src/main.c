@@ -5,14 +5,15 @@
 
 #include "./common.h"
 #include "./fs/fs.h"
+#include "./String/String.h"
 
 Errno main(int argc, char **argv) {
-  char src_file_content[READ_LIMIT];
-  
-  if (!read_entire_file(&src_file_content, "./src/main.c")) {
+  String file_results = String_create_string();
+
+  if (!read_entire_file(&file_results, "./test.txt")) {
     exit(1);
   }
   
-  printf("%s", src_file_content);
+  printf("%s", file_results.chars);
   return 0;
 }
