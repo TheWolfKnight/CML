@@ -10,10 +10,7 @@
 Errno main(int argc, char **argv) {
   String file_results = String_create_string();
 
-  if (!read_entire_file(&file_results, "./test.txt")) {
+  if (!read_entire_file(&file_results, "./src/common.h")) {
     exit(1);
   }
-  
-  printf("%s", file_results.chars);
-  return 0;
 }

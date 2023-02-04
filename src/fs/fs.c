@@ -19,10 +19,10 @@ Errno file_size(FILE *fptr, size_t *dest) {
 
   *dest = (size_t)result;
 
-  return 1;
+  return 0;
 }
 
-Errno read_entire_file(String *dest, const char *file_path) {
+int read_entire_file(String *dest, const char *file_path) {
   FILE *fptr;
   fptr = fopen(file_path, "r");
 
@@ -55,7 +55,9 @@ Errno read_entire_file(String *dest, const char *file_path) {
   return 1;
 }
 
-Errno write_file(const char *file_path, const char *content) {
+int write_file(const char *file_path, const char *content) {
+  UNUSED(content);
+
   FILE *fptr;
   fptr = fopen(file_path, "w");
 
@@ -65,13 +67,13 @@ Errno write_file(const char *file_path, const char *content) {
   return 0;
 }
 
-Errno append_file(const char *file_path, const char *content) {
+int append_file(const char *file_path, const char *content) {
   UNUSED(file_path);
   UNUSED(content);
   UNIMPLIMENTED;
 }
 
-Errno delete_file(const char *file_path) {
+int delete_file(const char *file_path) {
   UNUSED(file_path);
   UNIMPLIMENTED;
 }

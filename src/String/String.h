@@ -15,9 +15,8 @@ typedef struct {
 } String;
 
 String String_create_string();
-Errno String_add_char(String *dest, char c);
-Errno String_add_cstr(String *dest, char *s);
-Errno String_pop_char(String *source, char *dest);
-Errno String_extend_string_size(String *source, size_t new_size);
+int String_add_char(String *dest, const char c);
+int String_add_cstr(String *dest, const char *s);
+int String_pop_char(String *source, char *dest);
 
 #endif // STRING_H

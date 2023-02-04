@@ -1,24 +1,25 @@
 
 #include <stdio.h>
 #include <errno.h>
+#include <string.h>
 
 #ifndef COMMON_H_
 #define COMMON_H_
 
 typedef int Errno;
 
-#define UNIMPLIMENTED                  \
-  do {                                 \
-    printf("%s:%d: UNIMPLIMENTED %s\n",\
-            __FILE__,                  \
-            __LINE__,                  \
-            __func__);                 \
-    exit(1);                           \
-  } while (0)
+#define UNIMPLIMENTED                    \
+  do {                                   \
+    printf("\n%s:%d: UNIMPLIMENTED %s\n",\
+            __FILE__,                    \
+            __LINE__,                    \
+            __func__);                   \
+    exit(1);                             \
+  } while (0);
 
 #define UNRECHABLE                     \
   do {                                 \
-    printf("%s:%d: UNRECHABLE: %s\n",  \
+    printf("\n%s:%d: UNRECHABLE: %s\n",\
             __FILE__,                  \
             __LINE__,                  \
             __func__);                 \
@@ -27,15 +28,21 @@ typedef int Errno;
 
 #define TODO                           \
   do {                                 \
-    printf("%s:%d: TODO: %s\n",        \
+    printf("\n%s:%d: TODO: %s\n",      \
             __FILE__,                  \
             __LINE__,                  \
             __func__);                 \
     exit(1);                           \
-  } while (0)
+  } while (0);
 
-#define UNUSED(var) (void) var
+#define UNUSED(var) (void) var;
 
-#define ERR_PRINT(str, ...) fprintf(stderr, str, __VA_ARGS__);
+#define ERR_PRINT(str, ...)               \
+  do {                                    \
+      char buf[512];                      \
+      strcat(buf, "\n");                  \
+      strcat(buf, str);                   \
+      fprintf(stderr, buf, __VA_ARGS__);  \
+  } while (0);
 
 #endif // COMMON_H_
