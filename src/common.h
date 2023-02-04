@@ -36,4 +36,6 @@ typedef int Errno;
 
 #define UNUSED(var) (void) var
 
+#define ERR_PRINT(str, ...) fprintf(stderr, str, __VA_ARGS__);
+
 #endif // COMMON_H_
