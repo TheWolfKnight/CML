@@ -45,4 +45,7 @@ typedef int Errno;
       fprintf(stderr, buf, __VA_ARGS__);  \
   } while (0);
 
+#define SUBSTRING_MAX_LEN 1024
+void substring(int pos, int len, const char *string, char **dest);
+
 #endif // COMMON_H_

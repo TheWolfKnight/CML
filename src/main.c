@@ -6,11 +6,11 @@
 #include "./common.h"
 #include "./fs/fs.h"
 #include "./String/String.h"
+#include "./parser/cml.h"
 
 Errno main(int argc, char **argv) {
-  String file_results = String_create_string();
 
-  if (!read_entire_file(&file_results, "./src/common.h")) {
-    exit(1);
-  }
+  Cml_Tree tree = Cml_generate_tree();
+
+  Cml_parse_file(&tree, "./test.txt");
 }
