@@ -7,6 +7,7 @@
 #define COMMON_H_
 
 typedef int Errno;
+typedef int Bool;
 
 #define UNIMPLIMENTED                    \
   do {                                   \
@@ -35,7 +36,7 @@ typedef int Errno;
     exit(1);                           \
   } while (0);
 
-#define UNUSED(var) (void) var;
+#define UNUSED(...) (void) __VA_ARGS__;
 
 #define ERR_PRINT(str, ...)               \
   do {                                    \

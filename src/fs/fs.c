@@ -68,8 +68,7 @@ int write_file(const char *file_path, const char *content) {
 }
 
 int append_file(const char *file_path, const char *content) {
-  UNUSED(file_path);
-  UNUSED(content);
+  UNUSED(file_path, content);
   UNIMPLIMENTED;
 }
 
